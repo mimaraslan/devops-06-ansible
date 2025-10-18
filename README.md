@@ -186,7 +186,7 @@ cd /root/.ssh
 ```
 nano authorized_keys 
 ```
- YA DA    
+veya   
 ```
 vi authorized_keys  
 ```
@@ -210,7 +210,7 @@ cat /etc/ansible/hosts
 ```
 nano /etc/ansible/hosts 
 ```
-  YA DA    
+veya   
 ```
 vi /etc/ansible/hosts  
 ```
