@@ -216,6 +216,9 @@ vi /etc/ansible/hosts
 ```
 
 
+Ansible'ın yöneteceği makineleri kendimize göre grupluyoruz.
+mynodes, mynode1, mynode2, mynode3  grup isimleridir.
+Grup isimlerine istediğiniz isimleri verebilirsiniz.
 ```
 [mynodes]
 192.168.11.11
