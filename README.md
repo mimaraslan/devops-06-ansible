@@ -161,17 +161,26 @@ nano /etc/ansible/hosts   YA DA    vi /etc/ansible/hosts
 
 
 [mynodes]
+
 192.168.11.32
+
 192.168.11.82
+
 192.168.11.99
 
+
 [mynode1]
+
 192.168.11.32
 
+
 [mynode2]
+
 192.168.11.82
 
+
 [mynode3]
+
 192.168.11.99
 
 
