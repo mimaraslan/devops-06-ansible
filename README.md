@@ -259,3 +259,38 @@ Sadece node1 için ping atacağız.
 ansible            -m        ping    mynode1
 ```
 
+
+### Ubuntu makine 
+```
+sudo su
+
+apt update
+
+apt upgrade  -y
+
+nano /etc/hostname
+
+hostnamectl set-hostname managed-node3
+cat /etc/hostname
+reboot
+
+
+sudo su
+
+apt install openssh-server -y
+
+ssh-keygen
+
+systemctl status ssh
+systemctl start ssh
+
+
+ifconfig
+
+apt install net-tools
+
+ifconfig
+
+
+reboot
+```
