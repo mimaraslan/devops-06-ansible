@@ -723,9 +723,11 @@ ansible-playbook  05-maven.yml
 
 #### Ansible ile CentOS makinelere Docker kurmak
 ```  
+cd /opt/MyAnsible
+
 mkdir 06_my_docker
 
-cd /MyAnsible
+cd /06_my_docker
 ```  
 
 </hr>
