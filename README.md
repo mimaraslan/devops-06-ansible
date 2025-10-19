@@ -1,6 +1,7 @@
 # Ansible
 ### Ansible (Configuration Management and Deployment) - Oracle VM VirtualBox - Linux (Ubuntu, CentOS), Nodes
 
+![Ansible.png](Ansible.png)
 
 ####  Ansible
 https://docs.ansible.com/ansible/latest/getting_started/index.html#extpack
