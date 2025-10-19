@@ -604,7 +604,7 @@ vi 01_my_debugger.yaml
 ansible-playbook 01_my_debugger.yaml
 ```  
 
-</hr>
+<hr>
 
 ```  
 vi 02_my_serial.yaml
@@ -628,7 +628,7 @@ ansible-playbook 02_my_serial.yaml
 ```  
 
 
-</hr>
+<hr>
 
 ```  
 vi 03_my_serial_percent.yaml
@@ -651,7 +651,7 @@ vi 03_my_serial_percent.yaml
 ansible-playbook 03_my_serial_percent.yaml
 ```  
 
-</hr>
+<hr>
 
 
 ```  
@@ -674,7 +674,7 @@ vi 04_my_setup.yaml
 ansible-playbook 04_my_setup.yaml
 ```  
 
-</hr>
+<hr>
 
 
 #### Ansible ile CentOS makinelere Maven kurmak
@@ -719,7 +719,7 @@ ansible-playbook  05-maven.yml
 ```  
 
 
-</hr>
+<hr>
 
 #### Ansible ile CentOS makinelere Docker kurmak
 ```  
@@ -730,7 +730,7 @@ mkdir 06_my_docker
 cd /06_my_docker
 ```  
 
-</hr>
+<hr>
 
 ```  
 vi 01-checkDocker.yaml
@@ -766,7 +766,7 @@ vi 01-checkDocker.yaml
 ansible-playbook 01-checkDocker.yaml
 ```  
 
-</hr>
+<hr>
 
 ```  
 vi 02-removeDocker.yaml
@@ -800,7 +800,7 @@ vi 02-removeDocker.yaml
 ansible-playbook 02-removeDocker.yaml
 ```  
 
-</hr>
+<hr>
 
 ```  
 vi 03-installDocker.yaml
