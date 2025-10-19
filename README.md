@@ -564,3 +564,291 @@ ansible    -m   shell   -a "sudo apt install openjdk-21-jdk -y"    linux_ubuntu
 ```
 ansible    -m   shell   -a "sudo yum install nodejs -y"    linux_centos 
 ```  
+
+
+
+## Ansible Playbook
+
+```  
+cd /opt
+
+mkdir MyAnsible
+
+cd /MyAnsible
+```  
+
+
+
+```  
+vi 01_my_debugger.yaml
+
+```  
+
+
+```  
+- name: Debugger Demo
+  hosts: all
+  tasks:
+    - name: My execute command for task 1
+      command: "true"
+      debugger: on_failed
+    - name: My execute command for task 2
+      command: "true"
+      debugger: on_skipped
+    - name: My execute command for task 3
+      command: "true"
+      debugger: on_skipped
+```  
+
+```  
+ansible-playbook 01_my_debugger.yaml
+```  
+
+</hr>
+
+```  
+vi 02_my_serial.yaml
+```  
+
+```  
+- name: Serial Demo
+  hosts: all
+  serial: 2
+  tasks:
+    - name: MyTask 1
+      command: "echo my task 1"
+    - name: MyTask 2
+      command: "echo my task 2"
+    - name: MyTask 3
+      command: "echo my task 3"
+```       
+	 
+```  	 
+ansible-playbook 02_my_serial.yaml
+```  
+
+
+</hr>
+
+```  
+vi 03_my_serial_percent.yaml
+```  
+
+```  
+- name: Serial Demo
+  hosts: all
+  serial: "50%"
+  tasks:
+    - name: MyTask 1
+      command: "echo my task 1"
+    - name: MyTask 2
+      command: "echo my task 2"
+    - name: MyTask 3
+      command: "echo my task 3"
+```       
+	 
+```  	 
+ansible-playbook 03_my_serial_percent.yaml
+```  
+
+</hr>
+
+
+```  
+vi 04_my_setup.yaml
+```  
+
+```  
+- name: Demo Setup
+  hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+    - name: Install wget
+      yum:
+        name: wget 
+        state: present
+```  		
+	
+```  	
+ansible-playbook 04_my_setup.yaml
+```  
+
+</hr>
+
+
+#### Ansible ile CentOS makinelere Maven kurmak
+```  
+vi 05-maven.yml
+```  
+
+```  
+- name: Install Maven
+  hosts: mynodes
+  become: true
+  become_method: sudo
+  become_user: root
+  user: root
+  tasks:
+    - name: Download Maven tar
+      get_url:
+        url: https://downloads.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz
+        dest: /opt/apache-maven-3.9.11-bin.tar.gz
+    
+    - name: Create a directory
+      file:
+        path: /opt/maven
+        state: directory
+    
+    - name: Extract Maven
+      command: tar xvf /opt/apache-maven-3.9.11-bin.tar.gz -C /opt/maven
+   
+    - name: Update Profile
+      copy: content="export M2_HOME=/opt/maven/apache-maven-3.9.11 \n" dest=/etc/profile.d/maven.sh
+    - lineinfile:
+        path: /etc/profile.d/maven.sh
+        line: 'export PATH=${M2_HOME}/bin:${PATH}'
+    
+    - name: Source profile
+      shell: source /etc/profile.d/maven.sh
+```  
+
+
+```  
+ansible-playbook  05-maven.yml
+```  
+
+
+</hr>
+
+#### Ansible ile CentOS makinelere Docker kurmak
+```  
+mkdir 06_my_docker
+
+cd /MyAnsible
+```  
+
+</hr>
+
+```  
+vi 01-checkDocker.yaml
+```  
+
+
+```  
+- name: Check Docker & Docker-compose & Kubectl
+  hosts: mynodes
+  become_method: sudo
+  become_user: root
+  become: yes
+  gather_facts: no
+  tasks:
+
+    - name: Check Docker
+      command: docker --version
+      ignore_errors: yes
+      register: docker_check
+
+    - name: Check Docker-compose
+      command: docker-compose --version
+      ignore_errors: yes
+      register: docker_compose_check
+
+    - name: Check Kubectl
+      command: kubectl --version
+      ignore_errors: yes
+      register: kubectl_check
+```  
+
+```  
+ansible-playbook 01-checkDocker.yaml
+```  
+
+</hr>
+
+```  
+vi 02-removeDocker.yaml
+```  
+
+```  
+- name: Remove Docker&components
+  hosts: mynodes
+  become: true
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Remove Docker
+      yum:
+        name:
+          - docker
+          - docker-client
+          - docker-client-latest
+          - docker-common
+          - docker-latest
+          - docker-latest-logrotate
+          - docker-logrotate
+          - docker-engine
+          - docker-ce-cli
+          - docker-ce
+          - docker-selinux
+        state: removed
+```  
+
+```  
+ansible-playbook 02-removeDocker.yaml
+```  
+
+</hr>
+
+```  
+vi 03-installDocker.yaml
+```  
+
+```  
+- name: Install Docker Full
+  hosts: linux_centos
+  become: true
+  become_method: sudo
+  become_user: root
+  tasks:
+
+    - name: Install yum-utils
+      yum:
+        name: yum-utils
+        state: latest
+
+    - name: Install device-mapper-persistent-data
+      yum:
+        name: device-mapper-persistent-data
+        state: latest
+
+    - name: Install lvm2
+      yum:
+        name: lvm2
+        state: latest
+
+    - name: Add Docker Repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker-ce-cli
+      package:
+        name: docker-ce-cli-28.5.0
+        state: present
+
+    - name: Install Docker-ce
+      package:
+        name: docker-ce-28.5.0
+        state: present
+        
+    - name: Start Docker Service & Enabled
+      service:
+        name: docker
+        state: started
+        enabled: yes
+```  
+
+```  
+ansible-playbook 03-installDocker.yaml
+```  
