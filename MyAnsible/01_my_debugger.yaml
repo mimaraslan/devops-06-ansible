@@ -1,0 +1,12 @@
+- name: Debugger Demo
+  hosts: all
+  tasks:
+    - name: My execute command for task 1
+      command: "true"
+      debugger: on_failed
+    - name: My execute command for task 2
+      command: "true"
+      debugger: on_skipped
+    - name: My execute command for task 3
+      command: "true"
+      debugger: on_skipped
