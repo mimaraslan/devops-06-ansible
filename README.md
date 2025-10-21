@@ -619,6 +619,11 @@ Sadece CentOS makinelerde ateş duvarı servisini açtık.
 ansible  linux_centos    -m  service   -a "name=firewalld   state=started" 
 ```
 
+
+#### Komutların en sonundaki  -b
+become yani root, yönetici, admin gibi bu komutu çalıştır anlamına gelir. 
+ 
+ 
 <hr>
 
 #### ÖDEV: Ubuntudaki firewalld duvarı açmayı araştır. Aşağıdaki komutu Ubuntuya uyarla ve çalıştır. 
