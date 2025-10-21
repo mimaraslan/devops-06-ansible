@@ -683,7 +683,7 @@ ansible  linux_ubuntu    -m  service   -a "name=firewalld   state=stopped enable
 
 
 
-Shell komutları doğrudan makinelerin termianlinde komut çalışmadır.
+Shell sözcüğü ile doğrudan istediğimiz makinelerin termianlinde komutları çalıştırabiliriz.
 ```
 ansible    -m   shell   -a "free -m"      mynode1
 
