@@ -202,12 +202,12 @@ ssh-ed25519 ABCABCABCABCABCABCABCABCABCABCABCABCABCABC root@localhost.localdomai
 
 
 
-ControlNode makinesinde Ansible için ayar dosyasına gidiyoruz.
+#### ControlNode makinesine geç ve Ansible ayar dosyasını aç.
 ```
 cat /etc/ansible/hosts
-
 ```
 
+Ansinle hosts dosyasını ister nano ile ister vi ile aç
 ```
 nano /etc/ansible/hosts 
 ```
@@ -317,6 +317,7 @@ ssh-ed25519 ABCABCABCABCABCABCABCABCABCABCABCABCABCABC root@localhost.localdomai
 ```
 
 
+Şimdi ManagedNode'a gidiyoruz.
 #### Ubuntu makinesine geç.
 ControlNode makinesinden gelen public anahtarı Node3 Ubuntu makinesine gireceğiz.
 Böylece Node3 Control makinesini tanıyacak.
@@ -326,7 +327,11 @@ cd /root/.ssh
 ```
 
 ControlNode makinesinden gelen public anahtar bilgisini authorized_keys dosyasının içine yapıştırıp kaydet.
+```
+ssh-ed25519 ABCABCABCABCABCABCABCABCABCABCABCABCABCABC root@localhost.localdomain
+```
 
+authorized_keys dosyasını ister nano ile ister vi ile aç
 ```
 nano authorized_keys 
 ```
@@ -338,20 +343,14 @@ komutuyla açacağız.
 
 
 
-Terminaldeki bu public anahtarı kopyala
-```
-ssh-ed25519 ABCABCABCABCABCABCABCABCABCABCABCABCABCABC root@localhost.localdomain
-```
 
 
-
-
-ControlNode makinesinde Ansible için ayar dosyasına gidiyoruz.
+#### ControlNode makinesine geç ve Ansible ayar dosyasını aç.
 ```
 cat /etc/ansible/hosts
-
 ```
 
+Ansinle hosts dosyasını ister nano ile ister vi ile aç
 ```
 nano /etc/ansible/hosts 
 ```
