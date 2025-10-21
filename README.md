@@ -300,12 +300,98 @@ reboot
 ```
 
 
+#### ControlNode makinesinin terminaline git. 
+En yetkili admin yani kök kullanıcı ol.
+```
+su root
+```
+
+ControlNode makinesinden gelen public anahtar bilgisini terminalden oku.
+```
+cat id_ed25519.pub
+```
+
+Terminaldeki bu public anahtarı kopyala.
+```
+ssh-ed25519 ABCABCABCABCABCABCABCABCABCABCABCABCABCABC root@localhost.localdomain
+```
+
+
+#### Ubuntu makinesine geç.
+ControlNode makinesinden gelen public anahtarı Node3 Ubuntu makinesine gireceğiz.
+Böylece Node3 Control makinesini tanıyacak.
+
+```
+cd /root/.ssh
+```
+
+ControlNode makinesinden gelen public anahtar bilgisini authorized_keys dosyasının içine yapıştırıp kaydet.
+
+```
+nano authorized_keys 
+```
+veya   
+```
+vi authorized_keys  
+```
+komutuyla açacağız.
+
+
+
+Terminaldeki bu public anahtarı kopyala
+```
+ssh-ed25519 ABCABCABCABCABCABCABCABCABCABCABCABCABCABC root@localhost.localdomain
+```
+
+
+
+
+ControlNode makinesinde Ansible için ayar dosyasına gidiyoruz.
+```
+cat /etc/ansible/hosts
+
+```
+
+```
+nano /etc/ansible/hosts 
+```
+veya   
+```
+vi /etc/ansible/hosts  
+```
+
+
+Ansible'ın yöneteceği makineleri kendimize göre grupluyoruz.
+mynodes, mynode1, mynode2, mynode3  grup isimleridir.
+Grup isimlerine istediğiniz isimleri verebilirsiniz.
+```
+[mynodes]
+192.168.11.11
+192.168.11.22
+192.168.11.33
+
+[mynode1]
+192.168.11.11
+
+
+[mynode2]
+192.168.11.22
+
+
+[mynode3]
+192.168.11.99
+```
+
+
+
 
 
 ControlNode makinesinde 
 ```
 su root
 ```
+
+
 
 Bu kısımda root hakkının yönetim açık olduğunu gör.
 ```
