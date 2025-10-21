@@ -705,6 +705,7 @@ ansible    -m   shell   -a "sudo yum install nodejs -y"    linux_centos
 
 ## Ansible Playbook
 
+Çalışılacak dizine git. Orada bir klasör oluştur ve içine gir.
 ```  
 cd /opt
 
@@ -713,13 +714,13 @@ mkdir MyAnsible
 cd /MyAnsible
 ```  
 
-
-
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
 ```  
 vi 01_my_debugger.yaml
-
 ```  
 
+
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
 
 ```  
 - name: Debugger Demo
@@ -736,15 +737,23 @@ vi 01_my_debugger.yaml
       debugger: on_skipped
 ```  
 
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
+
 ```  
 ansible-playbook 01_my_debugger.yaml
 ```  
 
 <hr>
 
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
+serial ile makineleri ikişer üçer gibi yaparak çalıştırabiliriz.
+
 ```  
 vi 02_my_serial.yaml
 ```  
+
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
 
 ```  
 - name: Serial Demo
@@ -758,6 +767,8 @@ vi 02_my_serial.yaml
     - name: MyTask 3
       command: "echo my task 3"
 ```       
+
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
 	 
 ```  	 
 ansible-playbook 02_my_serial.yaml
@@ -766,9 +777,16 @@ ansible-playbook 02_my_serial.yaml
 
 <hr>
 
+
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
 ```  
 vi 03_my_serial_percent.yaml
 ```  
+
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
+
+serial içine % yüzde verirsek o zaman makine sayısını oranlar ve öyle çalıştırır.
 
 ```  
 - name: Serial Demo
@@ -782,6 +800,8 @@ vi 03_my_serial_percent.yaml
     - name: MyTask 3
       command: "echo my task 3"
 ```       
+
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
 	 
 ```  	 
 ansible-playbook 03_my_serial_percent.yaml
@@ -790,9 +810,21 @@ ansible-playbook 03_my_serial_percent.yaml
 <hr>
 
 
+
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
 ```  
 vi 04_my_setup.yaml
 ```  
+
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
+
+become: root, admin en yetkili yönetici anlamlarına gelir.
+
+Burada yum ile sadece CentOS makinelere kurulum yapılır.
+
+Ubuntu için apt kullanılmalı.
+
 
 ```  
 - name: Demo Setup
@@ -806,6 +838,8 @@ vi 04_my_setup.yaml
         state: present
 ```  		
 	
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
+	
 ```  	
 ansible-playbook 04_my_setup.yaml
 ```  
@@ -814,9 +848,14 @@ ansible-playbook 04_my_setup.yaml
 
 
 #### Ansible ile CentOS makinelere Maven kurmak
+
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
 ```  
 vi 05-maven.yml
 ```  
+
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
 
 ```  
 - name: Install Maven
@@ -849,6 +888,7 @@ vi 05-maven.yml
       shell: source /etc/profile.d/maven.sh
 ```  
 
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
 
 ```  
 ansible-playbook  05-maven.yml
@@ -858,6 +898,11 @@ ansible-playbook  05-maven.yml
 <hr>
 
 #### Ansible ile CentOS makinelere Docker kurmak
+
+Daha düzenli olması için çalışma klaösürümüzün içine Docker kurulumu yeni bir klasör daha oluşturup içine girdik. 
+
+Docker klasörünün içine de kurulumunun yaml dosyalarını oluşturacağız.
+
 ```  
 cd /opt/MyAnsible
 
@@ -868,10 +913,16 @@ cd /06_my_docker
 
 <hr>
 
+#### check Docker
+
+
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
 ```  
 vi 01-checkDocker.yaml
 ```  
 
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
 
 ```  
 - name: Check Docker & Docker-compose & Kubectl
@@ -898,15 +949,22 @@ vi 01-checkDocker.yaml
       register: kubectl_check
 ```  
 
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
+
 ```  
 ansible-playbook 01-checkDocker.yaml
 ```  
 
 <hr>
 
+#### remove Docker
+
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
 ```  
 vi 02-removeDocker.yaml
 ```  
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
 
 ```  
 - name: Remove Docker&components
@@ -932,15 +990,22 @@ vi 02-removeDocker.yaml
         state: removed
 ```  
 
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
+
 ```  
 ansible-playbook 02-removeDocker.yaml
 ```  
 
 <hr>
 
+#### install Docker
+
+Çalışma klasörümüzün içine bir yaml dosyası oluşturuyoruz.
+
 ```  
 vi 03-installDocker.yaml
 ```  
+Dosyanın içine yaml formatında komutlarımızı tasklar olarak giriyoruz.
 
 ```  
 - name: Install Docker Full
@@ -986,6 +1051,8 @@ vi 03-installDocker.yaml
         state: started
         enabled: yes
 ```  
+
+Ansinle ile yaml dosyasını çalıştırıyoruz. 
 
 ```  
 ansible-playbook 03-installDocker.yaml
