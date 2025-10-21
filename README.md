@@ -23,7 +23,7 @@ https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
 https://mremoteng.org/
 
 
-### MyControlNode makinesi
+### MyControlNode makinesi  - CentOS makine
 ```
 yum update -y 
 ```
@@ -83,7 +83,7 @@ reboot
 ```
 
 
-## Makine managed-node1
+## Makine managed-node1  - CentOS makine
 ```
 su root
 yum update -y 
@@ -106,7 +106,7 @@ ssh-keygen
 
 
 
-## Makine managed-node2
+## Makine managed-node2  - CentOS makine
 ```
 su root
 yum update -y 
@@ -263,8 +263,7 @@ Sadece node1 için ping atacağız.
 ansible            -m        ping    mynode1
 ```
 
-
-### Ubuntu makine 
+### Makine managed-node3  - Ubuntu makine 
 ```
 sudo su
 
@@ -620,17 +619,60 @@ Sadece CentOS makinelerde ateş duvarı servisini açtık.
 ansible  linux_centos    -m  service   -a "name=firewalld   state=started" 
 ```
 
+<hr>
 
-#### ÖDEV: Ubuntudaki firewalld bunua açılacak.
+#### ÖDEV: Ubuntudaki firewalld duvarı açmayı araştır. Aşağıdaki komutu Ubuntuya uyarla ve çalıştır. 
 ```
-ansible  linux_ubuntu    -m  service   -a "name=firewalld   state=started"
+ansible  linux_ubuntu    -m  service   -a "name=firewalld   state=started"   -b
+```
+
+#### Cevap:
+<hr>
+Önce Ubuntu sistemi güncelle.
+```
+ansible linux_ubuntu -m shell -a "apt update" -b
+```
+
+Ubuntuda olmayan firewalld paketini kur.
+```
+ansible linux_ubuntu -m apt -a "name=firewalld state=present update_cache=yes" -b
+```
+
+firewalld servisini aç.
+```
+ansible linux_ubuntu -m service -a "name=firewalld state=started enabled=yes" -b
 ```
 
 
-Sadece CentOS makinelerde ateş duvarı servisini kapat.
+
+<hr>
+
+
+Sadece CentOS makinelerde ateş duvarı firewalld servisini sadece o an için durduruyoruz. Geçici olarak kapattık.
+``` 
+ansible  linux_centos    -m  service   -a "name=firewalld   state=stopped"  -b
 ```
-ansible  linux_centos    -m  service   -a "name=firewalld   state=stopped" 
+
+Sadece CentOS makinelerde ateş duvarı firewalld servisini enabled=no  ile tamamen devre dışı bırakıyoruz. Kalıcı olarak kapatıyoruz.
+``` 
+ansible  linux_centos    -m  service   -a "name=firewalld   state=stopped enabled=no"  -b
 ```
+
+
+
+
+Sadece Ubuntu makinelerde ateş duvarı firewalld servisini sadece o an için durduruyoruz. Geçici olarak kapattık.
+``` 
+ansible  linux_ubuntu    -m  service   -a "name=firewalld   state=stopped"  -b
+```
+
+Sadece Ubuntu makinelerde ateş duvarı firewalld servisini enabled=no  ile tamamen devre dışı bırakıyoruz. Kalıcı olarak kapatıyoruz.
+``` 
+ansible  linux_ubuntu    -m  service   -a "name=firewalld   state=stopped enabled=no"  -b
+```
+
+
+
 
 
 Shell komutları doğrudan makinelerin termianlinde komut çalışmadır.
