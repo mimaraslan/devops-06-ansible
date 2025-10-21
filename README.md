@@ -632,8 +632,11 @@ ansible  linux_ubuntu    -m  service   -a "name=firewalld   state=started"   -b
 ```
 
 #### Cevap:
+
 <hr>
+
 Önce Ubuntu sistemi güncelle.
+
 ```
 ansible linux_ubuntu -m shell -a "apt update" -b
 ```
